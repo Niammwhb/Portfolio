@@ -53,7 +53,7 @@ Saya seorang Developer yang suka bikin aplikasi web ringan dengan tampilan moder
 
 * **Email:** [email\_farisedrik21@gmail.com](mailto:email_farisedrik21@gmail.com)
 * **LinkedIn:** [linkedin.com/in/farisedp](https://www.linkedin.com/in/farisedp/)
-* **Instagram (opsional):** @farisedrikprayoga
+* **Instagram:** @farisedrikprayoga
 
 ---
 
