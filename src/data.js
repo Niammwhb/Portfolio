@@ -12,9 +12,9 @@ import Tools3 from "/assets/tools/nextjs.png";
 import Tools4 from "/assets/tools/tailwind.png";
 import Tools5 from "/assets/tools/bootstrap.png";
 import Tools6 from "/assets/tools/js.png";
-import Tools7 from "/assets/tools/nodejs.png";
+import Tools7 from "/assets/tools/PacketTracer.png";
 import Tools8 from "/assets/tools/github.png";
-import Tools9 from "/assets/tools/ai.png";
+import Tools9 from "/assets/tools/VirtualBox.png";
 import Tools10 from "/assets/tools/canva.png";
 import Tools11 from "/assets/tools/figma.png";
 import Tools12 from "/assets/tools/kotlin.png";
@@ -42,18 +42,18 @@ export const listTools = [
     dad: "200",
   },
   {
-    id: 3,
-    gambar: Tools3,
-    nama: "Next JS",
-    ket: "Framework",
-    dad: "300",
+    id: 9,
+    gambar: Tools9,
+    nama: "VirtualBox",
+    ket: "Software Virtualization",
+    dad: "200",
   },
   {
-    id: 4,
-    gambar: Tools4,
-    nama: "Tailwind CSS",
-    ket: "Framework",
-    dad: "400",
+    id: 7,
+    gambar: Tools7,
+    nama: "Packet Tracer",
+    ket: "Network Simulator",
+    dad: "500",
   },
   {
     id: 5,
@@ -70,25 +70,11 @@ export const listTools = [
     dad: "600",
   },
   {
-    id: 7,
-    gambar: Tools7,
-    nama: "Node JS",
-    ket: "Javascript Runtime",
-    dad: "700",
-  },
-  {
     id: 8,
     gambar: Tools8,
     nama: "Github",
     ket: "Repository",
     dad: "800",
-  },
-  {
-    id: 9,
-    gambar: Tools9,
-    nama: "Adobe Illustrator",
-    ket: "Design App",
-    dad: "900",
   },
   {
     id: 10,
@@ -105,20 +91,6 @@ export const listTools = [
     dad: "1100",
   },
   {
-    id: 12,
-    gambar: Tools12,
-    nama: "Kotlin",
-    ket: "Language",
-    dad: "1200",
-  },
-  {
-    id: 13,
-    gambar: Tools13,
-    nama: "Firebase",
-    ket: "Framework",
-    dad: "1300",
-  },
-  {
     id: 14,
     gambar: Tools14,
     nama: "HTML",
@@ -132,13 +104,7 @@ export const listTools = [
     ket: "Language",
     dad: "1500",
   },
-  {
-    id: 16,
-    gambar: Tools16,
-    nama: "TypeScript",
-    ket: "Language",
-    dad: "1600",
-  },
+
   {
     id: 17,
     gambar: Tools17,
