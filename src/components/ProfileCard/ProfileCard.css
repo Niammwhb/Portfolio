@@ -13,12 +13,12 @@
   --icon: none;
   --behind-gradient: none;
   --inner-gradient: none;
-  --sunpillar-1: hsl(2, 100%, 73%);
-  --sunpillar-2: hsl(53, 100%, 69%);
-  --sunpillar-3: hsl(93, 100%, 69%);
-  --sunpillar-4: hsl(176, 100%, 76%);
+  --sunpillar-1: hsl(2, 100%, 48%);
+  --sunpillar-2: hsl(272, 100%, 50%);
+  --sunpillar-3: hsl(233, 100%, 54%);
+  --sunpillar-4: hsl(176, 100%, 50%);
   --sunpillar-5: hsl(228, 100%, 74%);
-  --sunpillar-6: hsl(283, 100%, 73%);
+  --sunpillar-6: hsl(196, 100%, 46%);
   --sunpillar-clr-1: var(--sunpillar-1);
   --sunpillar-clr-2: var(--sunpillar-2);
   --sunpillar-clr-3: var(--sunpillar-3);
@@ -36,7 +36,7 @@
 }
 
 .pc-card-wrapper::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: -10px;
   background: inherit;
@@ -69,19 +69,36 @@
   position: relative;
   background-blend-mode: color-dodge, normal, normal, normal;
   animation: glow-bg 12s linear infinite;
-  box-shadow: rgba(0, 0, 0, 0.8) calc((var(--pointer-from-left) * 10px) - 3px) calc((var(--pointer-from-top) * 20px) - 6px) 20px -5px;
+  box-shadow: rgba(0, 0, 0, 0.8) calc((var(--pointer-from-left) * 10px) - 3px)
+    calc((var(--pointer-from-top) * 20px) - 6px) 20px -5px;
   transition: transform 1s ease;
   transform: translate3d(0, 0, 0.1px) rotateX(0deg) rotateY(0deg);
   background-size: 100% 100%;
   background-position: 0 0, 0 0, 50% 50%, 0 0;
-  background-image: radial-gradient(farthest-side circle at var(--pointer-x) var(--pointer-y), hsla(266, 100%, 90%, var(--card-opacity)) 4%, hsla(266, 50%, 80%, calc(var(--card-opacity) * 0.75)) 10%, hsla(266, 25%, 70%, calc(var(--card-opacity) * 0.5)) 50%, hsla(266, 0%, 60%, 0) 100%), radial-gradient(35% 52% at 55% 20%, #00ffaac4 0%, #073aff00 100%), radial-gradient(100% 100% at 50% 50%, #00c1ffff 1%, #073aff00 76%), conic-gradient(from 124deg at 50% 50%, #c137ffff 0%, #07c6ffff 40%, #07c6ffff 60%, #c137ffff 100%);
+  background-image: radial-gradient(
+      farthest-side circle at var(--pointer-x) var(--pointer-y),
+      hsla(266, 100%, 90%, var(--card-opacity)) 4%,
+      hsla(266, 50%, 80%, calc(var(--card-opacity) * 0.75)) 10%,
+      hsla(266, 25%, 70%, calc(var(--card-opacity) * 0.5)) 50%,
+      hsla(266, 0%, 60%, 0) 100%
+    ),
+    radial-gradient(35% 52% at 55% 20%, #00ffaac4 0%, #073aff00 100%),
+    radial-gradient(100% 100% at 50% 50%, #00c1ffff 1%, #073aff00 76%),
+    conic-gradient(
+      from 124deg at 50% 50%,
+      #c137ffff 0%,
+      #07c6ffff 80%,
+      #07c6ffff 60%,
+      #c137ffff 100%
+    );
   overflow: hidden;
 }
 
 .pc-card:hover,
 .pc-card.active {
   transition: none;
-  transform: translate3d(0, 0, 0.1px) rotateX(var(--rotate-y)) rotateY(var(--rotate-x));
+  transform: translate3d(0, 0, 0.1px) rotateX(var(--rotate-y))
+    rotateY(var(--rotate-x));
 }
 
 .pc-card * {
@@ -105,10 +122,11 @@
   mask-mode: luminance;
   mask-repeat: repeat;
   mask-size: 150%;
-  mask-position: top calc(200% - (var(--background-y) * 5)) left calc(100% - var(--background-x));
+  mask-position: top calc(200% - (var(--background-y) * 5)) left
+    calc(100% - var(--background-x));
   transition: filter 0.6s ease;
   filter: brightness(0.66) contrast(1.33) saturate(0.33) opacity(0.5);
-  animation: holo-bg 18s linear infinite;
+  animation: holo-bg 30s linear infinite;
   mix-blend-mode: color-dodge;
 }
 
@@ -122,8 +140,33 @@
   background: transparent;
   background-size: cover;
   background-position: center;
-  background-image: repeating-linear-gradient(0deg, var(--sunpillar-clr-1) calc(var(--space) * 1), var(--sunpillar-clr-2) calc(var(--space) * 2), var(--sunpillar-clr-3) calc(var(--space) * 3), var(--sunpillar-clr-4) calc(var(--space) * 4), var(--sunpillar-clr-5) calc(var(--space) * 5), var(--sunpillar-clr-6) calc(var(--space) * 6), var(--sunpillar-clr-1) calc(var(--space) * 7)), repeating-linear-gradient(var(--angle), #0e152e 0%, hsl(180, 10%, 60%) 3.8%, hsl(180, 29%, 66%) 4.5%, hsl(180, 10%, 60%) 5.2%, #0e152e 10%, #0e152e 12%), radial-gradient(farthest-corner circle at var(--pointer-x) var(--pointer-y), hsla(0, 0%, 0%, 0.1) 12%, hsla(0, 0%, 0%, 0.15) 20%, hsla(0, 0%, 0%, 0.25) 120%);
-  background-position: 0 var(--background-y), var(--background-x) var(--background-y), center;
+  background-image: repeating-linear-gradient(
+      0deg,
+      var(--sunpillar-clr-1) calc(var(--space) * 1),
+      var(--sunpillar-clr-2) calc(var(--space) * 2),
+      var(--sunpillar-clr-3) calc(var(--space) * 3),
+      var(--sunpillar-clr-4) calc(var(--space) * 4),
+      var(--sunpillar-clr-5) calc(var(--space) * 5),
+      var(--sunpillar-clr-6) calc(var(--space) * 6),
+      var(--sunpillar-clr-1) calc(var(--space) * 7)
+    ),
+    repeating-linear-gradient(
+      var(--angle),
+      #0e152e 0%,
+      hsl(180, 10%, 60%) 3.8%,
+      hsl(180, 29%, 66%) 4.5%,
+      hsl(180, 10%, 60%) 5.2%,
+      #0e152e 10%,
+      #0e152e 12%
+    ),
+    radial-gradient(
+      farthest-corner circle at var(--pointer-x) var(--pointer-y),
+      hsla(0, 0%, 0%, 0.1) 12%,
+      hsla(0, 0%, 0%, 0.15) 20%,
+      hsla(0, 0%, 0%, 0.25) 120%
+    );
+  background-position: 0 var(--background-y),
+    var(--background-x) var(--background-y), center;
   background-blend-mode: color, hard-light;
   background-size: 500% 500%, 300% 300%, 200% 200%;
   background-repeat: repeat;
@@ -131,7 +174,7 @@
 
 .pc-shine::before,
 .pc-shine::after {
-  content: '';
+  content: "";
   background-position: center;
   background-size: cover;
   grid-area: 1/1;
@@ -152,16 +195,34 @@
 }
 
 .pc-shine::before {
-  background-image: linear-gradient(45deg, var(--sunpillar-4), var(--sunpillar-5), var(--sunpillar-6), var(--sunpillar-1), var(--sunpillar-2), var(--sunpillar-3)), radial-gradient(circle at var(--pointer-x) var(--pointer-y), hsl(0, 0%, 70%) 0%, hsla(0, 0%, 30%, 0.2) 90%), var(--grain);
+  background-image: linear-gradient(
+      45deg,
+      var(--sunpillar-4),
+      var(--sunpillar-5),
+      var(--sunpillar-6),
+      var(--sunpillar-1),
+      var(--sunpillar-2),
+      var(--sunpillar-3)
+    ),
+    radial-gradient(
+      circle at var(--pointer-x) var(--pointer-y),
+      hsl(0, 0%, 70%) 0%,
+      hsla(0, 0%, 30%, 0.2) 90%
+    ),
+    var(--grain);
   background-size: 250% 250%, 100% 100%, 220px 220px;
-  background-position: var(--pointer-x) var(--pointer-y), center, calc(var(--pointer-x) * 0.01) calc(var(--pointer-y) * 0.01);
+  background-position: var(--pointer-x) var(--pointer-y), center,
+    calc(var(--pointer-x) * 0.01) calc(var(--pointer-y) * 0.01);
   background-blend-mode: color-dodge;
-  filter: brightness(calc(2 - var(--pointer-from-center))) contrast(calc(var(--pointer-from-center) + 2)) saturate(calc(0.5 + var(--pointer-from-center)));
+  filter: brightness(calc(2 - var(--pointer-from-center)))
+    contrast(calc(var(--pointer-from-center) + 2))
+    saturate(calc(0.5 + var(--pointer-from-center)));
   mix-blend-mode: luminosity;
 }
 
 .pc-shine::after {
-  background-position: 0 var(--background-y), calc(var(--background-x) * 0.4) calc(var(--background-y) * 0.5), center;
+  background-position: 0 var(--background-y),
+    calc(var(--background-x) * 0.4) calc(var(--background-y) * 0.5), center;
   background-size: 200% 300%, 700% 700%, 100% 100%;
   mix-blend-mode: difference;
   filter: brightness(0.8) contrast(1.5);
@@ -170,7 +231,11 @@
 .pc-glare {
   transform: translate3d(0, 0, 1.1px);
   overflow: hidden;
-  background-image: radial-gradient(farthest-corner circle at var(--pointer-x) var(--pointer-y), hsl(248, 25%, 80%) 12%, hsla(207, 40%, 30%, 0.8) 90%);
+  background-image: radial-gradient(
+    farthest-corner circle at var(--pointer-x) var(--pointer-y),
+    hsl(248, 25%, 80%) 12%,
+    hsla(207, 40%, 30%, 0.8) 90%
+  );
   mix-blend-mode: overlay;
   filter: brightness(0.8) contrast(1.2);
   z-index: 4;
@@ -196,11 +261,13 @@
   inset: 0;
   z-index: 1;
   backdrop-filter: blur(30px);
-  mask: linear-gradient(to bottom,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0) 60%,
-      rgba(0, 0, 0, 1) 90%,
-      rgba(0, 0, 0, 1) 100%);
+  mask: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0) 60%,
+    rgba(0, 0, 0, 1) 90%,
+    rgba(0, 0, 0, 1) 100%
+  );
   pointer-events: none;
 }
 
@@ -209,16 +276,19 @@
   bottom: 20px;
   left: 20px;
   right: 20px;
-  z-index: 2;
+
+  z-index: 9999; /* ⬅️ PALING PENTING */
+  pointer-events: auto;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(30px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 15px;
   padding: 12px 14px;
-  pointer-events: auto;
 }
 
 .pc-user-details {
@@ -286,7 +356,11 @@
   overflow: hidden;
   text-align: center;
   position: relative;
-  transform: translate3d(calc(var(--pointer-from-left) * -6px + 3px), calc(var(--pointer-from-top) * -6px + 3px), 0.1px) !important;
+  transform: translate3d(
+    calc(var(--pointer-from-left) * -6px + 3px),
+    calc(var(--pointer-from-top) * -6px + 3px),
+    0.1px
+  ) !important;
   z-index: 5;
   mix-blend-mode: luminosity;
 }
@@ -486,4 +560,251 @@
     font-size: 9px;
     border-radius: 50px;
   }
+}
+
+src/components/ProfileCard/ProfileCard.css
+/* ============================= */
+/* FIX TOTAL AVATAR COLOR        */
+/* ============================= */
+
+/* Isolasi card supaya blend mode tidak bocor */
+.pc-card {
+  isolation: isolate;
+}
+
+/* Paksa avatar tidak ikut blend */
+.pc-avatar-content {
+  mix-blend-mode: normal !important;
+  z-index: 2;
+}
+
+/* Matikan efek blur di atas avatar */
+.pc-avatar-content::before {
+  display: none;
+}
+
+/* Avatar warna asli */
+.pc-avatar-content .avatar {
+  filter: grayscale(0%) saturate(1) brightness(1);
+  mix-blend-mode: normal !important;
+  opacity: 1;
+}
+
+/* ============================= */
+/* WHATSAPP BUTTON EFFECT        */
+/* ============================= */
+
+.pc-contact-btn {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 199, 255, 0.35),
+    rgba(138, 92, 255, 0.35),
+    rgba(255, 0, 199, 0.25)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+}
+
+.pc-contact-btn:hover {
+  box-shadow: 0 0 20px rgba(0, 199, 255, 0.6), 0 0 40px rgba(138, 92, 255, 0.5);
+  transform: translateY(-1px) scale(1.02);
+}
+
+/* ===================================== */
+/* ISOLATION FIX (ANTI BLEND CONFLICT)   */
+/* ===================================== */
+
+.pc-card {
+  isolation: isolate;
+}
+
+/* ===================================== */
+/* AVATAR – FULL COLOR FIX (FINAL)       */
+/* ===================================== */
+
+.pc-avatar-content {
+  mix-blend-mode: normal !important;
+  z-index: 2;
+}
+
+.pc-avatar-content::before {
+  display: none;
+}
+
+.pc-avatar-content .avatar {
+  filter: grayscale(0%) saturate(1.05) brightness(1.05);
+  mix-blend-mode: normal !important;
+  opacity: 1;
+}
+
+/* ===================================== */
+/* USER INFO BAR – HOLO THEME (FINAL)    */
+/* ===================================== */
+
+.pc-user-info {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 199, 255, 0.25),
+    rgba(138, 92, 255, 0.25),
+    rgba(255, 0, 199, 0.18)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 0 18px rgba(0, 199, 255, 0.25), 0 0 36px rgba(138, 92, 255, 0.2);
+  transition: all 0.35s ease;
+}
+
+.pc-card:hover .pc-user-info {
+  box-shadow: 0 0 28px rgba(0, 199, 255, 0.45),
+    0 0 55px rgba(138, 92, 255, 0.35);
+}
+
+/* ===================================== */
+/* USER TEXT COLOR                       */
+/* ===================================== */
+
+.pc-handle {
+  color: #ffffff;
+}
+
+.pc-status {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ===================================== */
+/* MINI AVATAR GLOW                      */
+/* ===================================== */
+
+.pc-mini-avatar {
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 10px rgba(0, 199, 255, 0.35);
+}
+
+/* ===================================== */
+/* CONTACT BUTTON – PRIMARY              */
+/* ===================================== */
+
+.pc-contact-btn {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 199, 255, 0.35),
+    rgba(138, 92, 255, 0.35),
+    rgba(255, 0, 199, 0.25)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  backdrop-filter: blur(14px);
+  transition: all 0.3s ease;
+}
+
+.pc-contact-btn:hover {
+  box-shadow: 0 0 20px rgba(0, 199, 255, 0.6), 0 0 40px rgba(138, 92, 255, 0.5);
+  transform: translateY(-1px) scale(1.05);
+}
+
+/* ===================================== */
+/* NAME – HOLO GRADIENT THEME (FINAL)    */
+/* ===================================== */
+
+.pc-details h3 {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+
+  background: linear-gradient(135deg, #00c7ff, #8a5cff, #ff00c7);
+
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  text-shadow: 0 0 10px rgba(0, 199, 255, 0.35),
+    0 0 20px rgba(138, 92, 255, 0.25);
+
+  animation: nameGlow 6s ease infinite;
+}
+
+/* Subtitle tetap tenang */
+.pc-details p {
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.4px;
+}
+
+/* Animasi gradient pelan */
+@keyframes nameGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ================= NAME COLOR FIX ================= */
+
+.pc-details-colored {
+  position: absolute;
+  top: 3em;
+  width: 100%;
+  text-align: center;
+  z-index: 10;
+  mix-blend-mode: normal;
+}
+
+.pc-details-colored h3 {
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  background: linear-gradient(135deg, #00c7ff, #8a5cff, #ff00c7);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: nameGlow 6s ease infinite;
+}
+
+.pc-details-colored p {
+  margin-top: -8px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+@keyframes nameGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ================= CLICK FIX ================= */
+
+/* Aktifkan interaksi */
+.pc-user-info,
+.pc-user-info * {
+  pointer-events: auto;
+}
+
+/* ================= HARD CLICK FIX ================= */
+
+/* Semua layer efek TIDAK BOLEH nangkap klik */
+.pc-shine,
+.pc-glare,
+.pc-card-wrapper::before {
+  pointer-events: none !important;
+}
+
+/* ================= FINAL CLICK FIX ================= */
+
+/* Layer efek hanya visual */
+.pc-shine,
+.pc-glare,
+.pc-card-wrapper::before {
+  pointer-events: none !important;
 }

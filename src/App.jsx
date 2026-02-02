@@ -2,325 +2,347 @@ import { useRef, useState, useEffect } from "react";
 import ProfileCard from "./components/ProfileCard/ProfileCard";
 import ShinyText from "./components/ShinyText/ShinyText";
 import BlurText from "./components/BlurText/BlurText";
-import ScrambledText from "./components/ScrambledText/ScrambledText";
-import SplitText from "./components/SplitText/SplitText";
 import Lanyard from "./components/Lanyard/Lanyard";
-import GlassIcons from "./components/GlassIcons/GlassIcons";
 import { listTools, listProyek } from "./data";
 import ChromaGrid from "./components/ChromaGrid/ChromaGrid";
-import ProjectModal from "./components/ProjectModal/ProjectModal"; // <-- IMPORT MODAL
+import ProjectModal from "./components/ProjectModal/ProjectModal";
 import Aurora from "./components/Aurora/Aurora";
-import AOS from 'aos';
 import ChatRoom from "./components/ChatRoom";
-import 'aos/dist/aos.css'; // You can also use <link> for styles
-// ..
-AOS.init();
+import AOS from "aos";
+import "aos/dist/aos.css";
 
-function App() {
+AOS.init({ once: true });
+
+export default function App() {
   const aboutRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  const [selectedProject, setSelectedProject] = useState(null); // null = modal tertutup
-
-  const handleProjectClick = (project) => {
-    setSelectedProject(project);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedProject(null);
-  };
-  // -------------------------
-
-  useEffect(() => {
-    const isReload =
-      performance.getEntriesByType("navigation")[0]?.type === "reload";
-
-    if (isReload) {
-      // Ambil path tanpa hash
-      const baseUrl = window.location.origin + "/portofolio/";
-      window.location.replace(baseUrl);
-    }
-  }, []);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    if (aboutRef.current) {
-      observer.observe(aboutRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
+  const [selectedProject, setSelectedProject] = useState(null);
 
   return (
     <>
-      <div className="absolute top-0 left-0 w-full h-full -z-10 ">
+      {/* ================= BACKGROUND AURORA ================= */}
+      <div className="fixed inset-0 -z-10">
         <Aurora
-          colorStops={["#577870", "#1F97A6", "#127B99"]}
-          blend={0.5}
-          amplitude={1.0}
+          colorStops={["#4FC3F7", "#bf00ff", "#4FC3F7"]}
+          blend={0.9}
+          amplitude={1}
           speed={0.5}
         />
       </div>
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <div className="hero grid md:grid-cols-2 items-center pt-10 xl:gap-0 gap-6 grid-cols-1">
-          <div className="animate__animated animate__fadeInUp animate__delay-3s">
-            <div className="flex items-center gap-3 mb-6 bg bg-zinc-800 w-fit p-4 rounded-2xl">
-              <img src="./assets/faris1.png" className="w-10 rounded-md" />
-              <q>Avoid or just undertake it</q>
+      {/* ================= HEADER ================= */}
+      <header
+        className="
+          fixed top-0 left-0 w-full z-50
+          bg-gradient-to-r
+          from-[#0b2c3a]/95 via-[#2a0b3d]/95 to-[#020617]/95
+          backdrop-blur-lg
+          border-b border-sky-400/20
+        "
+      >
+        <div className="max-w-7xl mx-auto h-[72px] px-5 flex items-center justify-between">
+          <h1 className="text-lg font-bold tracking-wide text-white drop-shadow-[0_0_8px_rgba(79,195,247,.8)]">
+            PORTFOLIO
+          </h1>
+
+          <nav className="hidden md:flex gap-8 text-sm">
+            {["Home", "About", "Project", "Contact"].map((item) => (
+              <a
+                key={item}
+                href={`#${item.toLowerCase()}`}
+                className="
+                  text-white/80
+                  transition-all duration-300
+                  hover:text-sky-300
+                  drop-shadow-[0_0_6px_rgba(79,195,247,0.6)]
+                  hover:drop-shadow-[0_0_14px_rgba(191,0,255,0.9)]
+                "
+              >
+                {item}
+              </a>
+            ))}
+          </nav>
+        </div>
+      </header>
+
+      {/* ================= MAIN ================= */}
+      <main className="pt-[96px] max-w-7xl mx-auto px-4">
+        {/* ================= HERO ================= */}
+        <section
+          id="home"
+          className="grid grid-cols-1 md:grid-cols-2 gap-14 items-center min-h-[90vh]"
+        >
+          <div>
+            <div className="flex items-center gap-3 mb-6 bg-zinc-900/70 p-4 rounded-2xl w-fit">
+              <img src="./assets/doscom.png" className="w-10 rounded-md" />
+              <q className="text-sm text-white/80">
+                Avoid or just undertake it
+              </q>
             </div>
-            <h1 className="text-5xl font-bold mb-6">
-              <ShinyText text="Hi I'm Faris Edrik Prayoga" disabled={false} speed={3} className='custom-class' />
+
+            <h1 className="text-4xl sm:text-5xl font-bold mb-6">
+              <ShinyText text="Hi I'm Ni'am Mawahib" speed={3} />
             </h1>
+
             <BlurText
               text="A passionate application and web developer dedicated to crafting modern, high-performance digital experiences through innovative and user-friendly solutions."
               delay={150}
               animateBy="words"
               direction="top"
-              className=" mb-6"
+              className="mb-8 text-white/70"
             />
-            <div className="flex items-center sm:gap-4 gap-2">
-              <a 
-                href="./assets/CV.pdf" 
-                download="Faris_Edrik_Prayoga_CV.pdf" 
-                className="font-semibold bg-[#1a1a1a] p-4 px-6 rounded-full border border-gray-700 hover:bg-[#222] transition-colors"
-              >
-                <ShinyText text="Download CV" disabled={false} speed={3} className="custom-class" />
-              </a>
 
-              <a href="#project" className="font-semibold bg-[#1a1a1a] p-4 px-6 rounded-full border border-gray-700 hover:bg-[#222] transition-colors">
-                <ShinyText text="Explore My Projects" disabled={false} speed={3} className="custom-class" />
-              </a>
+            <div className="flex flex-wrap gap-4">
+              {["Download CV", "My Projects"].map((label, i) => (
+                <a
+                  key={label}
+                  href={i === 0 ? "./assets/CV.pdf" : "#project"}
+                  download={i === 0}
+                  className="
+                    px-7 py-4 rounded-full
+                    text-sky-300 font-medium
+                    border border-sky-400/40
+                    bg-gradient-to-r from-sky-500/10 via-purple-500/10 to-sky-500/10
+                    backdrop-blur-md
+                    shadow-[0_0_30px_rgba(79,195,247,0.35)]
+                    hover:text-white
+                    hover:border-purple-400/70
+                    hover:shadow-[0_0_45px_rgba(191,0,255,0.6)]
+                    transition-all
+                  "
+                >
+                  <ShinyText text={label} speed={3} />
+                </a>
+              ))}
             </div>
-
           </div>
-          <div className="md:ml-auto animate__animated animate__fadeInUp animate__delay-4s">
+
+          <div className="mx-auto md:ml-auto">
             <ProfileCard
-              name="Faris Edrik P"
-              title="Web Developer"
-              handle="farisedrikp"
+              name="Ni'am Mawahib"
+              title="Web Developer | Network Engineer"
+              handle="niammwhb."
               status="Online"
               contactText="Contact Me"
-              avatarUrl="./assets/faris.png"
-              showUserInfo={true}
-              enableTilt={true}
-              enableMobileTilt={false}
-              onContactClick={() => console.log('Contact clicked')}
+              avatarUrl="./assets/doscom.png"
+              showUserInfo
+              enableTilt
             />
           </div>
-        </div>
-        {/* tentang */}
-        <div className="mt-15 mx-auto w-full max-w-[1600px] rounded-3xl border-[5px] border-violet-500/40 shadow-[0_0_30px_rgba(168,85,247,0.4)] bg-gradient-to-br from-[#0a0a0a] via-[#111111] to-[#1a1a1a] p-6" id="about">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-10 pt-0 px-8" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
-            <div className="basis-full md:basis-7/12 pr-0 md:pr-8 border-b md:border-b-0 md:border-r border-violet-500/30">
-              {/* Kolom kiri */}
-              <div className="flex-1 text-left">
-                <h2 className="text-3xl md:text-4xl font-bold text-white mb-5">
-                  About Me
-                </h2>
+        </section>
 
-                <BlurText
-                  text="I’m Faris Edrik Prayoga, a full-stack developer passionate about building modern, high-performance applications with an intuitive user experience. I enjoy working with the latest technologies like Artificial Intelligence, Machine Learning, and cloud-based development, blending creativity with precision to deliver impactful solutions. With over three years of experience and more than 20 completed projects, I’m committed to helping users and businesses grow in the digital era through functional, aesthetic, and scalable digital products."
-                  delay={150}
-                  animateBy="words"
-                  direction="top"
-                  className="text-base md:text-lg leading-relaxed mb-10 text-gray-300"
-                />
+        {/* ================= ABOUT ================= */}
+        <section
+          id="about"
+          ref={aboutRef}
+          className="
+            mt-32 p-6 sm:p-8 rounded-3xl
+            bg-gradient-to-br from-[#060b18] via-[#0b1d2a] to-[#12091f]
+            border border-sky-400/30
+            shadow-[0_0_60px_rgba(79,195,247,0.25)]
+          "
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-white drop-shadow-[0_0_10px_rgba(79,195,247,0.7)]">
+                About Me
+              </h2>
 
-                <div className="flex flex-col sm:flex-row items-center sm:justify-between text-center sm:text-left gap-y-8 sm:gap-y-0 mb-4 w-full">
-                  <div>
-                    <h1 className="text-3xl md:text-4xl mb-1">
-                      20<span className="text-violet-500">+</span>
-                    </h1>
-                    <p>Project Finished</p>
-                  </div>
-                  <div>
-                    <h1 className="text-3xl md:text-4xl mb-1">
-                      3<span className="text-violet-500">+</span>
-                    </h1>
-                    <p>Years of Experience</p>
-                  </div>
-                  <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600" data-aos-once="true">
-                    <h1 className="text-3xl md:text-4xl mb-1">
-                      3.81<span className="text-violet-500">/4.00</span>
-                    </h1>
-                    <p>GPA</p>
-                  </div>
-                </div>
+              <BlurText
+                text="I’m Ni'am Mawahib, a full-stack developer passionate about building modern, high-performance applications with an intuitive user experience. I enjoy working with the latest technologies like Artificial Intelligence, Machine Learning, and cloud-based development."
+                delay={120}
+                animateBy="words"
+                direction="top"
+                className="text-white/70 mb-10"
+              />
 
-
-                <ShinyText
-                  text="Working with heart, creating with mind."
-                  disabled={false}
-                  speed={3}
-                  className="text-sm md:text-base text-violet-400"
-                />
+              <div className="flex flex-col sm:flex-row gap-6 sm:justify-between max-w-md">
+                <Stat value="20+" label="Projects" color="sky" />
+                <Stat value="3+" label="Years" color="sky" />
+                <Stat value="3.81/4.00" label="GPA" color="purple" />
               </div>
+
+              <p className="mt-8 text-sky-400 text-sm">
+                Working with heart, creating with mind.
+              </p>
             </div>
 
-            {/* Kolom kanan */}
-            <div className="basis-full md:basis-5/12 pl-0 md:pl-8 overflow-hidden max-w-full flex justify-center ">
+            <div className="flex justify-center">
               <Lanyard position={[0, 0, 15]} gravity={[0, -40, 0]} />
             </div>
           </div>
+        </section>
 
-        </div>
-        <div className="tools mt-32">
-          <h1 className="text-4xl/snug font-bold mb-4" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true" >Tools & Technologies</h1>
-          <p className="w-2/5 text-base/loose opacity-50" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300" data-aos-once="true">My Profesional Skills</p>
-          <div className="tools-box mt-14 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4">
+        {/* ================= TOOLS & TECHNOLOGIES ================= */}
+        <section className="mt-32 overflow-hidden">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-3 text-white">
+            Tools & Technologies
+          </h2>
+          <p className="text-white/60 mb-12 max-w-xl">
+            My professional skills and technologies I work with
+          </p>
 
-            {listTools.map((tool) => (
-              <div
-                key={tool.id} data-aos="fade-up" data-aos-duration="1000" data-aos-delay={tool.dad} data-aos-once="true"
-                className="flex items-center gap-4 p-4 border border-zinc-700 rounded-xl bg-zinc-900/60 backdrop-blur-md hover:bg-zinc-800/80 transition-all duration-300 group shadow-lg"
-              >
-                <img
-                  src={tool.gambar}
-                  alt="Tools Image"
-                  className="w-16 h-16 object-contain bg-zinc-800 p-2 rounded-lg group-hover:bg-zinc-900 transition-all duration-300"
-                />
-                <div className="flex flex-col overflow-hidden">
-                  <div className="truncate">
-                    <ShinyText
-                      text={tool.nama}
-                      disabled={false}
-                      speed={3}
-                      className="text-lg font-semibold block"
-                    />
-                  </div>
-                  <p className="text-sm text-zinc-400 truncate">{tool.ket}</p>
-                </div>
-              </div>
-            ))}
+          {/* ===== BARIS ATAS (KIRI ➜ KANAN) ===== */}
+          <div className="relative w-full overflow-hidden mb-8">
+            <div className="flex gap-6 w-max marquee-right">
+              {[
+                ...listTools.slice(0, Math.ceil(listTools.length / 2)),
+                ...listTools.slice(0, Math.ceil(listTools.length / 2)),
+              ].map((tool, index) => (
+                <ToolCard key={`top-${index}`} tool={tool} />
+              ))}
+            </div>
           </div>
-        </div>
-        {/* tentang */}
 
-        {/* Proyek */}
-        <div className="proyek mt-32 py-10" id="project" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true"></div>
-        <h1 className="text-center text-4xl font-bold mb-2" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">Project</h1>
-        <p className="text-base/loose text-center opacity-50" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300" data-aos-once="true">Showcasing a selection of projects that reflect my skills, creativity, and passion for building meaningful digital experiences.</p>
-        <div className="proyek-box mt-14" >
+          {/* ===== BARIS BAWAH (KANAN ➜ KIRI) ===== */}
+          <div className="relative w-full overflow-hidden">
+            <div className="flex gap-6 w-max marquee-left">
+              {[
+                ...listTools.slice(Math.ceil(listTools.length / 2)),
+                ...listTools.slice(Math.ceil(listTools.length / 2)),
+              ].map((tool, index) => (
+                <ToolCard key={`bottom-${index}`} tool={tool} />
+              ))}
+            </div>
+          </div>
+        </section>
 
-          <div style={{ height: 'auto', position: 'relative' }} data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400" data-aos-once="true" >
+        {/* ================= PROJECT ================= */}
+        <section
+          id="project"
+          className="
+            mt-32 py-24 rounded-3xl
+            bg-gradient-to-br from-[#060b18] via-[#0b1d2a] to-[#020617]
+            border border-sky-400/30
+            shadow-[0_0_60px_rgba(79,195,247,0.25)]
+          "
+        >
+          <h2 className="text-4xl font-bold text-center text-white mb-3">
+            Project
+          </h2>
+          <p className="text-center text-white/60 max-w-3xl mx-auto">
+            Showcasing selected works that reflect creativity and performance.
+          </p>
+
+          <div className="mt-16">
             <ChromaGrid
               items={listProyek}
-              onItemClick={handleProjectClick} // Kirim fungsi untuk handle klik
+              onItemClick={setSelectedProject}
               radius={500}
               damping={0.45}
               fadeOut={0.6}
-              ease="power3.out"
             />
           </div>
-        </div>
-        {/* Proyek */}
+        </section>
 
-
-        {/* Kontak */}
-        <div className="kontak mt-32 sm:p-10 p-0" id="contact">
-          <h1
-            className="text-4xl mb-2 font-bold text-center"
-            data-aos="fade-up"
-            data-aos-duration="1000"
-            data-aos-once="true"
-          >
+        {/* ================= CONTACT ================= */}
+        <section id="contact" className="mt-32 pb-24">
+          <h2 className="text-4xl font-bold text-center mb-12 text-white">
             Contact & Chat
-          </h1>
-          <p
-            className="text-base/loose text-center mb-10 opacity-50"
-            data-aos="fade-up"
-            data-aos-duration="1000"
-            data-aos-delay="300"
-            data-aos-once="true"
-          >
-            Get in touch with me or chat in real-time
-          </p>
+          </h2>
 
-          {/* Container dua kolom */}
-          <div className="flex flex-col md:flex-row gap-8">
-            {/* Chat Room di kiri */}
-            <div className="flex-1 bg-zinc-800 p-6 rounded-md" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400" data-aos-once="true">
-              <ChatRoom />
-            </div>
-
-            {/* Contact Form di kanan */}
-            <div className="flex-1">
-              <form
-                action="https://formsubmit.co/rissoppa21@gmail.com"
-                method="POST"
-                className="bg-zinc-800 p-10 w-full rounded-md"
-                autoComplete="off"
-                data-aos="fade-up"
-                data-aos-duration="1000"
-                data-aos-delay="500"
-                data-aos-once="true"
-              >
-                <div className="flex flex-col gap-6">
-                  <div className="flex flex-col gap-2">
-                    <label className="font-semibold">Full Name</label>
-                    <input
-                      type="text"
-                      name="Name"
-                      placeholder="Input Name..."
-                      className="border border-zinc-500 p-2 rounded-md"
-                      required
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <label className="font-semibold">Email</label>
-                    <input
-                      type="email"
-                      name="Email"
-                      placeholder="Input Email..."
-                      className="border border-zinc-500 p-2 rounded-md"
-                      required
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <label htmlFor="message" className="font-semibold">Message</label>
-                    <textarea
-                      name="message"
-                      id="message"
-                      cols="45"
-                      rows="7"
-                      placeholder="Message..."
-                      className="border border-zinc-500 p-2 rounded-md"
-                      required
-                    ></textarea>
-                  </div>
-                  <div className="text-center">
-                    <button
-                      type="submit"
-                      className="font-semibold bg-[#1a1a1a] p-4 px-6 rounded-full w-full cursor-pointer border border-gray-700 hover:bg-[#222] transition-colors"
-                    >
-                      <ShinyText text="Send" disabled={false} speed={3} className="custom-class" />
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <ChatRoom />
+            <form className="bg-zinc-900/80 p-8 rounded-2xl">
+              <input
+                className="w-full p-3 mb-4 rounded bg-black/40"
+                placeholder="Name"
+              />
+              <input
+                className="w-full p-3 mb-4 rounded bg-black/40"
+                placeholder="Email"
+              />
+              <textarea
+                className="w-full p-3 mb-4 rounded bg-black/40"
+                rows="5"
+                placeholder="Message"
+              />
+              <button className="w-full py-4 rounded-full bg-black border border-sky-400/40">
+                <ShinyText text="Send" speed={3} />
+              </button>
+            </form>
           </div>
-        </div>
-        {/* Kontak */}
+        </section>
       </main>
 
+      {/* ================= MODAL ================= */}
       <ProjectModal
         isOpen={!!selectedProject}
-        onClose={handleCloseModal}
+        onClose={() => setSelectedProject(null)}
         project={selectedProject}
       />
     </>
-  )
+  );
 }
 
-export default App
+/* ================= COMPONENTS ================= */
+function Stat({ value, label, color }) {
+  const map = {
+    sky: "text-sky-400 drop-shadow-[0_0_8px_rgba(79,195,247,0.9)]",
+    purple: "text-purple-400 drop-shadow-[0_0_8px_rgba(191,0,255,0.9)]",
+  };
+  return (
+    <div>
+      <h3 className={`text-3xl font-bold ${map[color]}`}>{value}</h3>
+      <p className="text-white/60 text-sm">{label}</p>
+    </div>
+  );
+}
+
+function ToolCard({ tool }) {
+  return (
+    <div
+      className="
+        relative
+        min-w-[260px]
+        rounded-2xl
+        p-[1.5px]
+        bg-gradient-to-br
+        from-sky-400/40
+        via-purple-500/40
+        to-sky-400/40
+      "
+    >
+      <div
+        className="
+          h-full w-full
+          rounded-2xl
+          bg-gradient-to-br
+          from-[#060b18]
+          via-[#0b1d2a]
+          to-[#12091f]
+          backdrop-blur-xl
+          p-5
+          flex items-center gap-4
+          transition-all duration-500
+          hover:shadow-[0_0_35px_rgba(168,85,247,0.45)]
+        "
+      >
+        {/* ICON */}
+        <div
+          className="
+            w-12 h-12
+            flex items-center justify-center
+            rounded-xl
+            bg-gradient-to-br
+            from-sky-500/20
+            to-purple-500/20
+          "
+        >
+          <img
+            src={tool.gambar}
+            alt={tool.nama}
+            className="w-7 h-7 object-contain"
+          />
+        </div>
+
+        {/* TEXT */}
+        <div className="flex flex-col">
+          <span className="text-white font-semibold leading-tight">
+            {tool.nama}
+          </span>
+          <span className="text-sm text-white/50">{tool.ket}</span>
+        </div>
+      </div>
+    </div>
+  );
+}

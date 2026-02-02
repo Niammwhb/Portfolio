@@ -1,7 +1,35 @@
 @import "tailwindcss";
 
+/* base font */
 @layer base {
   body {
     font-family: "Poppins", sans-serif;
   }
+}
+
+/* ===== MARQUEE ANIMATION ===== */
+@keyframes marqueeLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marqueeRight {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.marquee-left {
+  animation: marqueeLeft 30s linear infinite;
+}
+
+.marquee-right {
+  animation: marqueeRight 30s linear infinite;
 }

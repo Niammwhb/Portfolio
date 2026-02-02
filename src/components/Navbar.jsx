@@ -16,11 +16,6 @@ const Navbar = ({ hidden = false }) => {
   return (
     <nav className="navbar relative z-50 py-7 flex items-center justify-between px-6 md:px-12">
       {/* Logo */}
-      <div className="logo">
-        <h1 className="text-3xl font-bold text-white p-1 md:bg-transparent md:text-white">
-          Portofolio
-        </h1>
-      </div>
 
       {/* Menu */}
       <ul
@@ -31,12 +26,7 @@ const Navbar = ({ hidden = false }) => {
           p-4 rounded-br-2xl rounded-bl-2xl 
           transition-all md:transition-none
           ${active ? "top-0 opacity-100" : "-top-10 opacity-0"}`}
-      >
-        <li><a href="#home" className="sm:text-lg text-base font-medium">Home</a></li>
-        <li><a href="#about" className="sm:text-lg text-base font-medium">About</a></li>
-        <li><a href="#project" className="sm:text-lg text-base font-medium">Project</a></li>
-        <li><a href="#contact" className="sm:text-lg text-base font-medium">Contact</a></li>
-      </ul>
+      ></ul>
     </nav>
   );
 };
