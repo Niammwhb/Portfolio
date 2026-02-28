@@ -145,7 +145,7 @@ export const listProyek = [
       "A mobile application powered by Artificial Intelligence and Machine Learning, developed to assist in the early detection of Adolescent Idiopathic Scoliosis (AIS). By analyzing patient data and patterns, the app provides predictions that can help doctors and patients take preventive measures. This project demonstrates the role of AI in modern healthcare by improving accuracy, accessibility, and efficiency in medical diagnosis.",
     borderColor: "#3B82F6",
     gradient: "linear-gradient(145deg, #3B82F6, #000)",
-    url: "https://github.com/rissss21",
+    url: "https://github.com/Niammwhb/deteksi-katarak-app",
     dad: "100",
   },
   {
@@ -156,7 +156,7 @@ export const listProyek = [
     fullDescription: "Coming Soon.",
     borderColor: "#10B981",
     gradient: "linear-gradient(180deg, #10B981, #000)",
-    url: "https://github.com/rissss21",
+    url: "https://github.com/Niammwhb/Yovar-Laundry",
     dad: "200",
   },
   {
@@ -180,7 +180,7 @@ export const listProyek = [
       "An interactive web portfolio showcasing my professional journey, skills, and projects. Designed with a clean yet modern aesthetic, the portfolio highlights my technical expertise in web development, software engineering, and IoT. The site also serves as a central hub for potential employers and collaborators to explore my works, reflecting both my creativity and technical precision.",
     borderColor: "#10B981",
     gradient: "linear-gradient(180deg, #10B981, #000)",
-    url: "https://github.com/rissss21",
+    url: "https://github.com/Niammwhb/Portfolio",
     dad: "400",
   },
   {

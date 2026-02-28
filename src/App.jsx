@@ -65,11 +65,11 @@ export default function App() {
       </header>
 
       {/* ================= MAIN ================= */}
-      <main className="pt-[96px] max-w-7xl mx-auto px-4">
+      <main className="pt-[85px] max-w-7xl mx-auto px-4">
         {/* ================= HERO ================= */}
         <section
           id="home"
-          className="grid grid-cols-1 md:grid-cols-2 gap-14 items-center min-h-[90vh]"
+          className="grid grid-cols-1 md:grid-cols-2 gap-14 items-center min-h-[80vh] pb-16"
         >
           <div>
             <div className="flex items-center gap-3 mb-6 bg-zinc-900/70 p-4 rounded-2xl w-fit">
@@ -156,9 +156,9 @@ export default function App() {
               />
 
               <div className="flex flex-col sm:flex-row gap-6 sm:justify-between max-w-md">
-                <Stat value="20+" label="Projects" color="sky" />
-                <Stat value="3+" label="Years" color="sky" />
-                <Stat value="3.81/4.00" label="GPA" color="purple" />
+                <Stat value="1+" label="Projects" color="sky" />
+                <Stat value="1+" label="Years" color="sky" />
+                <Stat value="2.00/3.00" label="GPA" color="purple" />
               </div>
 
               <p className="mt-8 text-sky-400 text-sm">
@@ -166,8 +166,23 @@ export default function App() {
               </p>
             </div>
 
-            <div className="flex justify-center">
-              <Lanyard position={[0, 0, 15]} gravity={[0, -40, 0]} />
+            <div className="relative flex justify-center items-center h-[520px]">
+              {/* Lingkaran Besar */}
+              <div
+                className="w-[420px] h-[420px] rounded-full overflow-hidden 
+  shadow-xl border border-white/10 group cursor-pointer"
+              >
+                <img
+                  src={`${import.meta.env.BASE_URL}assets/profile.png`}
+                  alt="Ni'am Mawahib"
+                  className="
+        w-full h-full object-cover
+        grayscale
+        group-hover:grayscale-0
+        transition-all duration-700 ease-in-out
+      "
+                />
+              </div>
             </div>
           </div>
         </section>

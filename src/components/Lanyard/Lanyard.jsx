@@ -19,7 +19,7 @@ import {
 import { MeshLineGeometry, MeshLineMaterial } from "meshline";
 
 // replace with your own imports, see the usage snippet for details
-const cardGLB = "/portofolio/card.glb";
+
 const lanyard = "/portofolio/assets/lanyard.png";
 
 import * as THREE from "three";
@@ -98,7 +98,7 @@ function Band({ maxSpeed = 50, minSpeed = 0 }) {
     angularDamping: 4,
     linearDamping: 4,
   };
-  const { nodes, materials } = useGLTF(cardGLB);
+
   const texture = useTexture(lanyard);
   const [curve] = useState(
     () =>
