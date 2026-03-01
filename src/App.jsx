@@ -10,6 +10,16 @@ import Aurora from "./components/Aurora/Aurora";
 import ChatRoom from "./components/ChatRoom";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { motion } from "framer-motion";
+import ContactForm from "./components/ContactForm";
+import {
+  Instagram,
+  Github,
+  Linkedin,
+  Youtube,
+  Mail,
+  Phone,
+} from "lucide-react";
 
 AOS.init({ once: true });
 
@@ -30,17 +40,9 @@ export default function App() {
       </div>
 
       {/* ================= HEADER ================= */}
-      <header
-        className="
-          fixed top-0 left-0 w-full z-50
-          bg-gradient-to-r
-          from-[#0b2c3a]/95 via-[#2a0b3d]/95 to-[#020617]/95
-          backdrop-blur-lg
-          border-b border-sky-400/20
-        "
-      >
+      <header className="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-[#0b2c3a]/95 via-[#2a0b3d]/95 to-[#020617]/95 backdrop-blur-lg border-b border-sky-400/20">
         <div className="max-w-7xl mx-auto h-[72px] px-5 flex items-center justify-between">
-          <h1 className="text-lg font-bold tracking-wide text-white drop-shadow-[0_0_8px_rgba(79,195,247,.8)]">
+          <h1 className="text-lg font-bold tracking-wide text-white/80">
             PORTFOLIO
           </h1>
 
@@ -49,13 +51,7 @@ export default function App() {
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
-                className="
-                  text-white/80
-                  transition-all duration-300
-                  hover:text-sky-300
-                  drop-shadow-[0_0_6px_rgba(79,195,247,0.6)]
-                  hover:drop-shadow-[0_0_14px_rgba(191,0,255,0.9)]
-                "
+                className="text-white/80 transition-all duration-300 hover:text-sky-300 drop-shadow-[0_0_6px_rgba(79,195,247,0.6)] hover:drop-shadow-[0_0_14px_rgba(191,0,255,0.9)]"
               >
                 {item}
               </a>
@@ -88,7 +84,8 @@ export default function App() {
               delay={150}
               animateBy="words"
               direction="top"
-              className="mb-8 text-white/70"
+              align="left"
+              className="mb-8 text-white/70 max-w-xl"
             />
 
             <div className="flex flex-wrap gap-4">
@@ -97,18 +94,7 @@ export default function App() {
                   key={label}
                   href={i === 0 ? "./assets/CV.pdf" : "#project"}
                   download={i === 0}
-                  className="
-                    px-7 py-4 rounded-full
-                    text-sky-300 font-medium
-                    border border-sky-400/40
-                    bg-gradient-to-r from-sky-500/10 via-purple-500/10 to-sky-500/10
-                    backdrop-blur-md
-                    shadow-[0_0_30px_rgba(79,195,247,0.35)]
-                    hover:text-white
-                    hover:border-purple-400/70
-                    hover:shadow-[0_0_45px_rgba(191,0,255,0.6)]
-                    transition-all
-                  "
+                  className="px-7 py-4 rounded-full text-sky-300 font-medium border border-sky-400/40 bg-gradient-to-r from-sky-500/10 via-purple-500/10 to-sky-500/10 backdrop-blur-md shadow-[0_0_30px_rgba(79,195,247,0.35)] hover:text-white hover:border-purple-400/70 hover:shadow-[0_0_45px_rgba(191,0,255,0.6)] transition-all"
                 >
                   <ShinyText text={label} speed={3} />
                 </a>
@@ -116,7 +102,7 @@ export default function App() {
             </div>
           </div>
 
-          <div className="mx-auto md:ml-auto">
+          <div className="mx-auto md:ml-auto md:mr-0 md:translate-x-0">
             <ProfileCard
               name="Ni'am Mawahib"
               title="Web Developer | Network Engineer"
@@ -134,28 +120,26 @@ export default function App() {
         <section
           id="about"
           ref={aboutRef}
-          className="
-            mt-32 p-6 sm:p-8 rounded-3xl
-            bg-gradient-to-br from-[#060b18] via-[#0b1d2a] to-[#12091f]
-            border border-sky-400/30
-            shadow-[0_0_60px_rgba(79,195,247,0.25)]
-          "
+          className="mt-32 pt-8 pb-8 px-6 sm:px-8 rounded-3xl bg-gradient-to-br from-[#060b18] via-[#0b1d2a] to-[#12091f] border border-sky-400/30 shadow-[0_0_60px_rgba(79,195,247,0.25)]"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
+            {/* TEXT SIDE */}
+            <div className="flex flex-col items-center text-center w-full">
               <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-white drop-shadow-[0_0_10px_rgba(79,195,247,0.7)]">
                 About Me
               </h2>
 
-              <BlurText
-                text="I’m Ni'am Mawahib, a full-stack developer passionate about building modern, high-performance applications with an intuitive user experience. I enjoy working with the latest technologies like Artificial Intelligence, Machine Learning, and cloud-based development."
-                delay={120}
-                animateBy="words"
-                direction="top"
-                className="text-white/70 mb-10"
-              />
+              <div className="max-w-lg">
+                <BlurText
+                  text="I’m Ni'am Mawahib, a full-stack developer passionate about building modern, high-performance applications with an intuitive user experience. I enjoy working with the latest technologies like Artificial Intelligence, Machine Learning, and cloud-based development."
+                  delay={120}
+                  animateBy="words"
+                  direction="top"
+                  className="text-white/70 mb-10"
+                />
+              </div>
 
-              <div className="flex flex-col sm:flex-row gap-6 sm:justify-between max-w-md">
+              <div className="flex flex-col sm:flex-row gap-10 justify-center">
                 <Stat value="1+" label="Projects" color="sky" />
                 <Stat value="1+" label="Years" color="sky" />
                 <Stat value="2.00/3.00" label="GPA" color="purple" />
@@ -166,27 +150,92 @@ export default function App() {
               </p>
             </div>
 
+            {/* IMAGE SIDE */}
             <div className="relative flex justify-center items-center h-[520px]">
-              {/* Lingkaran Besar */}
-              <div
-                className="w-[420px] h-[420px] rounded-full overflow-hidden 
-  shadow-xl border border-white/10 group cursor-pointer"
-              >
-                <img
-                  src={`${import.meta.env.BASE_URL}assets/profile.png`}
-                  alt="Ni'am Mawahib"
+              <div className="relative w-[420px] flex justify-center mt-15">
+                {/* FOTO */}
+                <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[190px] h-[190px] rounded-full overflow-hidden border-4 border-[#0b1d2a] shadow-[0_0_40px_rgba(79,195,247,0.35)] z-20 bg-black">
+                  <img
+                    src={`${import.meta.env.BASE_URL}assets/profile.png`}
+                    alt="Ni'am Mawahib"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                {/* CARD */}
+                <div
                   className="
-        w-full h-full object-cover
-        grayscale
-        group-hover:grayscale-0
-        transition-all duration-700 ease-in-out
-      "
-                />
+   w-[310px]
+    h-[390px]
+    rounded-3xl
+    bg-gradient-to-br
+    from-[#060b18]
+    via-[#0b1d2a]
+    to-[#12091f]
+    border border-sky-400/30
+    shadow-[0_0_60px_rgba(79,195,247,0.25)]
+    flex flex-col items-center
+    pt-36
+  "
+                >
+                  {/* GREETING */}
+                  <p
+                    className="
+                    mt-5
+  text-white
+  text-4xl
+  font-semibold
+  mb-5
+  tracking-wide
+"
+                  >
+                    Hi Netizen!!
+                  </p>
+
+                  {/* BUTTON */}
+                  <a
+                    href="#contact"
+                    className="
+                        mt-5
+      px-8 py-3
+      rounded-full
+      bg-black
+      text-white
+      font-medium
+      transition-all duration-300
+      hover:scale-105
+      hover:shadow-[0_0_25px_rgba(79,195,247,0.5)]
+    "
+                  >
+                    Let's Talk
+                  </a>
+
+                  {/* ICON ROW */}
+                  <div className="flex gap-3 mt-5">
+                    {[Phone, Mail, Linkedin, Github].map((Icon, index) => (
+                      <div
+                        key={index}
+                        className="
+          w-10 h-10
+          rounded-full
+          bg-black
+          flex items-center justify-center
+          text-white
+          shadow-lg
+          transition-all duration-300
+          hover:scale-110
+          hover:shadow-[0_0_25px_rgba(79,195,247,0.6)]
+        "
+                      >
+                        <Icon size={15} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </section>
-
         {/* ================= TOOLS & TECHNOLOGIES ================= */}
         <section className="mt-32 overflow-hidden">
           <h2 className="text-3xl sm:text-4xl font-bold mb-3 text-white">
@@ -251,30 +300,51 @@ export default function App() {
 
         {/* ================= CONTACT ================= */}
         <section id="contact" className="mt-32 pb-24">
-          <h2 className="text-4xl font-bold text-center mb-12 text-white">
+          <h2
+            className="
+      text-3xl sm:text-4xl
+      font-bold 
+      text-center 
+      text-white 
+      mb-16
+      drop-shadow-[0_0_10px_rgba(79,195,247,0.7)]
+    "
+          >
             Contact & Chat
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <ChatRoom />
-            <form className="bg-zinc-900/80 p-8 rounded-2xl">
-              <input
-                className="w-full p-3 mb-4 rounded bg-black/40"
-                placeholder="Name"
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-stretch">
+            {/* ================= LEFT SIDE ================= */}
+            <div className="space-y-6">
+              <ContactItem
+                icon={Mail}
+                title="Email"
+                value="niamabadi25@gmail.com"
               />
-              <input
-                className="w-full p-3 mb-4 rounded bg-black/40"
-                placeholder="Email"
+
+              <ContactItem
+                icon={Phone}
+                title="WhatsApp"
+                value="0821 3567 8636"
               />
-              <textarea
-                className="w-full p-3 mb-4 rounded bg-black/40"
-                rows="5"
-                placeholder="Message"
+
+              <ContactItem
+                icon={Linkedin}
+                title="LinkedIn"
+                value="linkedin.com/in/niam-mawahib"
               />
-              <button className="w-full py-4 rounded-full bg-black border border-sky-400/40">
-                <ShinyText text="Send" speed={3} />
-              </button>
-            </form>
+
+              <ContactItem
+                icon={Github}
+                title="GitHub"
+                value="https://github.com/Niammwhb"
+              />
+            </div>
+
+            {/* ================= RIGHT SIDE ================= */}
+            <div>
+              <ContactForm />
+            </div>
           </div>
         </section>
       </main>
@@ -299,6 +369,45 @@ function Stat({ value, label, color }) {
     <div>
       <h3 className={`text-3xl font-bold ${map[color]}`}>{value}</h3>
       <p className="text-white/60 text-sm">{label}</p>
+    </div>
+  );
+}
+
+function ContactItem({ icon: Icon, title, value }) {
+  return (
+    <div
+      className="
+      flex items-center gap-4
+      p-6 rounded-2xl
+      bg-gradient-to-br
+      from-[#060b18]
+      via-[#0b1d2a]
+      to-[#12091f]
+      border border-sky-400/20
+      hover:border-purple-400/40
+      transition-all duration-300
+      shadow-[0_0_30px_rgba(79,195,247,0.15)]
+    "
+    >
+      <div
+        className="
+        w-12 h-12
+        flex items-center justify-center
+        rounded-full
+        bg-gradient-to-br
+        from-sky-500
+        to-purple-600
+        text-white
+        shadow-[0_0_20px_rgba(191,0,255,0.6)]
+      "
+      >
+        <Icon size={20} />
+      </div>
+
+      <div>
+        <h4 className="text-white font-semibold">{title}</h4>
+        <p className="text-white/60 text-sm">{value}</p>
+      </div>
     </div>
   );
 }
@@ -332,7 +441,6 @@ function ToolCard({ tool }) {
           hover:shadow-[0_0_35px_rgba(168,85,247,0.45)]
         "
       >
-        {/* ICON */}
         <div
           className="
             w-12 h-12
@@ -350,7 +458,6 @@ function ToolCard({ tool }) {
           />
         </div>
 
-        {/* TEXT */}
         <div className="flex flex-col">
           <span className="text-white font-semibold leading-tight">
             {tool.nama}

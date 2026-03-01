@@ -7,7 +7,7 @@ import {
   onSnapshot,
   query,
   orderBy,
-  serverTimestamp
+  serverTimestamp,
 } from "firebase/firestore";
 
 export default function ChatRoom() {
@@ -40,25 +40,53 @@ export default function ChatRoom() {
       uid: user.uid,
       displayName: user.displayName,
       photoURL: user.photoURL,
-      createdAt: serverTimestamp()
+      createdAt: serverTimestamp(),
     });
     setMessage("");
   };
 
   return (
-    <div className="bg-zinc-900 border border-gray-700 p-6 rounded-xl shadow-lg max-w-xl mx-auto mt-5">
-      <h2 className="text-2xl font-bold text-center mb-4 text-white">💬 Chat Room</h2>
+    <div
+      className="
+    w-full
+    rounded-3xl
+    bg-gradient-to-br
+    from-[#060b18]
+    via-[#0b1d2a]
+    to-[#12091f]
+    border border-sky-400/20
+    shadow-[0_0_40px_rgba(79,195,247,0.15)]
+    backdrop-blur-xl
+    p-6
+  "
+    >
+      <h2 className="text-xl font-semibold text-white mb-6 tracking-wide text-center">
+        Chat Room
+      </h2>
 
       {/* Header user */}
       {user && (
-        <div className="flex justify-between items-center mb-4 border-b border-gray-700 pb-3">
+        <div className="flex justify-between items-center mb-4 border-b border-white/10 pb-4">
           <div className="flex items-center gap-3">
-            <img src={user.photoURL} alt="avatar" className="w-10 h-10 rounded-full" />
-            <span className="text-white font-semibold">{user.displayName}</span>
+            <img
+              src={user.photoURL}
+              alt="avatar"
+              className="w-10 h-10 rounded-full border border-white/20"
+            />
+            <span className="text-white font-medium">{user.displayName}</span>
           </div>
           <button
             onClick={logout}
-            className="bg-red-600 px-4 py-1 rounded-full text-white hover:bg-red-700"
+            className="
+            px-4 py-1
+            rounded-full
+            text-sm
+            bg-white/10
+            border border-white/20
+            text-white
+            hover:bg-white/20
+            transition
+          "
           >
             Logout
           </button>
@@ -66,34 +94,57 @@ export default function ChatRoom() {
       )}
 
       {/* Area pesan */}
-      <div className="h-72 overflow-y-auto border border-gray-700 p-3 rounded-lg bg-zinc-800 mb-4 space-y-3">
+      <div
+        className="
+      h-[350px]
+      overflow-y-auto
+      rounded-2xl
+      bg-black/30
+      border border-white/10
+      p-4
+      space-y-4
+      mb-4
+    "
+      >
         {messages.map((msg) => (
           <div
             key={msg.id}
-            className={`flex gap-2 ${msg.uid === user?.uid ? "justify-end" : "justify-start"}`}
+            className={`flex gap-3 ${
+              msg.uid === user?.uid ? "justify-end" : "justify-start"
+            }`}
           >
             {msg.uid !== user?.uid && (
               <img
                 src={msg.photoURL || "https://via.placeholder.com/40"}
                 alt="avatar"
-                className="w-8 h-8 rounded-full"
+                className="w-8 h-8 rounded-full border border-white/10"
               />
             )}
+
             <div
-              className={`p-3 rounded-lg max-w-[75%] ${
+              className={`
+              max-w-[75%]
+              px-4 py-2
+              rounded-2xl
+              text-sm
+              ${
                 msg.uid === user?.uid
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-700 text-white"
-              }`}
+                  ? "bg-gradient-to-r from-sky-500/20 to-purple-500/20 border border-sky-400/30 text-white"
+                  : "bg-white/5 border border-white/10 text-white"
+              }
+            `}
             >
-              <div className="text-xs opacity-70 mb-1">{msg.displayName}</div>
+              <div className="text-xs text-white/50 mb-1">
+                {msg.displayName}
+              </div>
               <div>{msg.text}</div>
             </div>
+
             {msg.uid === user?.uid && (
               <img
                 src={msg.photoURL || "https://via.placeholder.com/40"}
                 alt="avatar"
-                className="w-8 h-8 rounded-full"
+                className="w-8 h-8 rounded-full border border-white/10"
               />
             )}
           </div>
@@ -102,17 +153,42 @@ export default function ChatRoom() {
 
       {/* Form login / kirim pesan */}
       {user ? (
-        <form onSubmit={sendMessage} className="flex gap-2 flex-wrap sm:flex-nowrap w-full">
+        <form
+          onSubmit={sendMessage}
+          className="flex gap-3 flex-wrap sm:flex-nowrap w-full"
+        >
           <input
             type="text"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder="Ketik pesan..."
-            className="flex-1 min-w-0 p-2 rounded-lg bg-zinc-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Type your message..."
+            className="
+            flex-1
+            min-w-0
+            px-4 py-3
+            rounded-xl
+            bg-black/40
+            border border-white/10
+            text-white
+            focus:outline-none
+            focus:border-sky-400/50
+          "
           />
+
           <button
             type="submit"
-            className="bg-green-600 px-4 py-2 rounded-lg text-white hover:bg-green-700 w-full sm:w-auto"
+            className="
+            px-6
+            rounded-xl
+            bg-gradient-to-r
+            from-sky-500
+            to-purple-500
+            text-white
+            font-medium
+            hover:opacity-90
+            transition
+            w-full sm:w-auto
+          "
           >
             Send
           </button>
@@ -121,16 +197,23 @@ export default function ChatRoom() {
         <div className="flex flex-col items-center justify-center gap-4">
           <button
             onClick={loginWithGoogle}
-            className="flex items-center gap-3 bg-white text-gray-800 px-5 py-2 rounded-full shadow hover:bg-gray-200 transition"
+            className="
+            px-6 py-3
+            rounded-full
+            bg-gradient-to-r
+            from-sky-500
+            to-purple-500
+            text-white
+            font-medium
+            hover:opacity-90
+            transition
+          "
           >
-            <img
-              src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-              alt="Google logo"
-              className="w-5 h-5"
-            />
             Login with Google
           </button>
-          <p className="text-sm text-gray-400">Login untuk mengirim pesan</p>
+          <p className="text-sm text-white/50">
+            Login required to send messages
+          </p>
         </div>
       )}
     </div>
